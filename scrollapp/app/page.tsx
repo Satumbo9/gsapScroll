@@ -78,9 +78,35 @@ export default function Home() {
   }, []);
   return (
     <section className="flex flex-col h-screen w-screen bg-white text-white items-center justify-center">
-      <div ref={containerRef} className="grid grid-cols-2 gap-0">
-        <div ref={id1} id="1" className="h-80 w-80 bg-sky-500">
-          1
+      <div ref={containerRef} className="grid grid-cols-2 gap-0 justify-center">
+        <div ref={id1} id="1" className="h-80 w-80 bg-sky-400 grid grid-cols-3">
+          {/* <div ref={id3} id="1" className="h-10 w-10 bg-sky-600">
+            1
+          </div>
+          <div id="1" className="h-10 w-10 bg-sky-400">
+            2
+          </div>
+          <div id="1" className="h-10 w-10 bg-sky-200">
+            3
+          </div>
+          <div id="1" className="h-10 w-10 bg-sky-900">
+            4
+          </div>
+          <div id="1" className="h-10 w-10 bg-sky-600">
+            5
+          </div>
+          <div id="1" className="h-10 w-10 bg-sky-600">
+            6
+          </div>
+          <div id="1" className="h-10 w-10 bg-sky-600">
+            6
+          </div>
+          <div id="1" className="h-10 w-10 bg-sky-600">
+            6
+          </div>
+          <div id="1" className="h-10 w-10 bg-sky-600">
+            6
+          </div> */}
         </div>
         <div ref={id2} id="2" className="h-80 w-80 bg-sky-900">
           2
@@ -88,8 +114,38 @@ export default function Home() {
         <div ref={id3} id="3" className="h-80 w-80 bg-sky-200">
           3
         </div>
-        <div ref={id4} id="4" className="h-80 w-80 bg-sky-600">
-          4
+        <div
+          ref={id4}
+          id="4"
+          className="h-80 w-80  grid grid-cols-3 bg-sky-500 items-center justify-center"
+        >
+          {/* <div ref={id3} id="1" className="h-10 w-10 bg-sky-600">
+            1
+          </div>
+          <div id="1" className="h-10 w-10 bg-sky-400">
+            2
+          </div>
+          <div id="1" className="h-10 w-10 bg-sky-200">
+            3
+          </div>
+          <div id="1" className="h-10 w-10 bg-sky-900">
+            4
+          </div>
+          <div id="1" className="h-10 w-10 bg-sky-600">
+            5
+          </div>
+          <div id="1" className="h-10 w-10 bg-sky-600">
+            6
+          </div>
+          <div id="1" className="h-10 w-10 bg-sky-600">
+            6
+          </div>
+          <div id="1" className="h-10 w-10 bg-sky-600">
+            6
+          </div>
+          <div id="1" className="h-10 w-10 bg-sky-600">
+            6
+          </div> */}
         </div>
       </div>
       <p className=" text-black text-5xl hidden">Text company</p>
