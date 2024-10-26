@@ -1,19 +1,23 @@
 "use client";
 import Image from "next/image";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
+import { Modal } from "@/components/ui/Modal";
 import gsap from "gsap";
 
 export default function Home() {
   const containerRef = useRef<HTMLDivElement>(null);
+  const [isVisible, setIsVisible] = useState<boolean>(false);
   const id1 = useRef<HTMLDivElement>(null);
   const id4 = useRef<HTMLDivElement>(null);
 
   const id2 = useRef<HTMLDivElement>(null);
   const id3 = useRef<HTMLDivElement>(null);
 
+  const [pageLoaded, setPageLoaded] = useState(false);
+
   const textRef = useRef<HTMLParagraphElement>(null);
 
-  useEffect(() => {
+  const animate = () => {
     if (containerRef.current) {
       const tl = gsap.timeline({
         defaults: {
@@ -69,86 +73,74 @@ export default function Home() {
           x: 0,
           y: 0,
         })
-        .to(textRef, {
+        .to(textRef.current, {
           css: {
             visibility: "flex",
           },
         });
     }
+  };
+
+  useEffect(() => {
+    console.log("Page started Loading, state", pageLoaded);
+    animate();
   }, []);
+
+  //Handle Modal
+
+  const handleModal = () => {
+    setIsVisible(true);
+  };
+
+  const handleModalClose = () => {
+    setIsVisible(false);
+  };
+
   return (
-    <section className="flex flex-col h-screen w-screen bg-white text-white items-center justify-center">
-      <div ref={containerRef} className="grid grid-cols-2 gap-0 justify-center">
-        <div ref={id1} id="1" className="h-80 w-80 bg-sky-400 grid grid-cols-3">
-          {/* <div ref={id3} id="1" className="h-10 w-10 bg-sky-600">
-            1
-          </div>
-          <div id="1" className="h-10 w-10 bg-sky-400">
-            2
-          </div>
-          <div id="1" className="h-10 w-10 bg-sky-200">
-            3
-          </div>
-          <div id="1" className="h-10 w-10 bg-sky-900">
-            4
-          </div>
-          <div id="1" className="h-10 w-10 bg-sky-600">
-            5
-          </div>
-          <div id="1" className="h-10 w-10 bg-sky-600">
-            6
-          </div>
-          <div id="1" className="h-10 w-10 bg-sky-600">
-            6
-          </div>
-          <div id="1" className="h-10 w-10 bg-sky-600">
-            6
-          </div>
-          <div id="1" className="h-10 w-10 bg-sky-600">
-            6
-          </div> */}
-        </div>
-        <div ref={id2} id="2" className="h-80 w-80 bg-sky-900">
-          2
-        </div>
-        <div ref={id3} id="3" className="h-80 w-80 bg-sky-200">
-          3
-        </div>
+    <section className="flex flex-col h-screen w-screen overflow-hidden  text-white items-center justify-center">
+      <div className="flex items-center justify-center h-screen w-screen">
         <div
-          ref={id4}
-          id="4"
-          className="h-80 w-80  grid grid-cols-3 bg-sky-500 items-center justify-center"
+          ref={containerRef}
+          className="grid grid-cols-2 gap-0 justify-center"
         >
-          {/* <div ref={id3} id="1" className="h-10 w-10 bg-sky-600">
-            1
-          </div>
-          <div id="1" className="h-10 w-10 bg-sky-400">
+          <div
+            ref={id1}
+            onClick={handleModal}
+            id="1"
+            className="h-80 w-80 bg-sky-400 grid grid-cols-3"
+          ></div>
+          <div ref={id2} id="2" className="h-80 w-80 bg-sky-900">
             2
           </div>
-          <div id="1" className="h-10 w-10 bg-sky-200">
+          <div ref={id3} id="3" className="h-80 w-80 bg-sky-200">
             3
           </div>
-          <div id="1" className="h-10 w-10 bg-sky-900">
-            4
-          </div>
-          <div id="1" className="h-10 w-10 bg-sky-600">
-            5
-          </div>
-          <div id="1" className="h-10 w-10 bg-sky-600">
-            6
-          </div>
-          <div id="1" className="h-10 w-10 bg-sky-600">
-            6
-          </div>
-          <div id="1" className="h-10 w-10 bg-sky-600">
-            6
-          </div>
-          <div id="1" className="h-10 w-10 bg-sky-600">
-            6
-          </div> */}
+          <div
+            ref={id4}
+            id="4"
+            className="h-80 w-80  grid grid-cols-3 bg-sky-500 items-center justify-center"
+          ></div>
         </div>
+        <p className=" text-black text-5xl hidden">Text company</p>
       </div>
-      <p className=" text-black text-5xl hidden">Text company</p>
+      {/* {isVisible && (
+        <div
+          onClick={handleModalClose}
+          className="absolute flex items-center justify-center h-screen w-screen bg-black bg-opacity-35"
+        ></div>
+      )} */}
+
+      <Modal onClick={handleModalClose} isVisible={isVisible} id="modal">
+        <div className="h-[500px] w-[500px] gap-10 bg-white flex flex-col items-center justify-center text-black">
+          <p>Hello</p>
+          <div className="flex gap-5">
+            <button className="bg-red-500 h-10 w-48">close</button>
+            <button className="bg-red-500 h-10 w-48" onClick={animate}>
+              confirm
+            </button>
+          </div>
+        </div>
+      </Modal>
     </section>
   );
 }
